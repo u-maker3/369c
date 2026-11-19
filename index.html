@@ -1,6 +1,8 @@
 <!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>みろく流・神仏ご縁鑑定</title><style>
-:root{--ink:#392c39;--purple:#60436f;--gold:#a67c36;--paper:#fffdf9;--bg:#f3eff5}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif;line-height:1.8}.wrap{max-width:850px;margin:auto;padding:20px 15px 50px}header{text-align:center;padding:25px 8px}header small{letter-spacing:.2em;color:var(--gold)}h1{font-size:clamp(24px,5vw,35px);margin:5px 0;color:var(--purple)}h2{font-size:21px;color:var(--purple);border-bottom:1px solid #d8c9db;padding-bottom:7px}h3{color:var(--purple);margin:10px 0}.panel,.sheet{background:var(--paper);border:1px solid #e6dce7;border-radius:15px;padding:22px;margin:14px 0;box-shadow:0 3px 12px #36273a0b}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{display:block;font-weight:700;font-size:14px}input,select{display:block;width:100%;margin-top:5px;padding:11px;border:1px solid #cbbfd0;border-radius:8px;background:white;font:inherit;font-size:16px}button{cursor:pointer;border:0;border-radius:10px;padding:13px 22px;font-size:16px;font-weight:700;background:var(--purple);color:white}button.secondary{background:#8c744c}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #bd9fd1}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.note{font-size:12px;color:#665c68}.lead{font-size:19px;font-weight:700;color:var(--purple)}.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.tile{border:1px solid #e4d8df;border-radius:12px;padding:13px;text-align:center;background:#fff}.tile .emoji{font-size:28px}.tile strong{display:block;font-size:16px}.tile small{color:#726875}.tag{display:inline-block;border:1px solid #d6bd8d;color:#785b24;border-radius:30px;padding:2px 11px;font-size:12px}.quote{background:#f6f0f7;border-left:4px solid var(--purple);padding:12px 16px;border-radius:5px}.pagebreak{break-before:page}.source{font-size:12px;overflow-wrap:anywhere}.hidden{display:none!important}#error{color:#a22929;font-weight:bold}@media(max-width:550px){.formgrid,.trio{grid-template-columns:1fr}.panel,.sheet{padding:17px}.tile{text-align:left}.tile .emoji{display:inline;margin-right:8px}}@page{size:A4 portrait;margin:13mm}@media print{body{background:white;font-size:10.5pt;line-height:1.6}.wrap{padding:0;max-width:none}header,.panel,.actions,.no-print{display:none!important}.sheet{border:none;box-shadow:none;margin:0;padding:0;border-radius:0}h2{font-size:16pt}.trio{grid-template-columns:repeat(3,1fr)}.tile{padding:9px}.tile strong{font-size:10pt}.pagebreak{break-before:page}p{margin:8px 0}.note,.source{font-size:8pt}#result{display:block!important}}
-</style></head><body><div class="wrap"><header><small>MIROKU ORIGINAL READING</small><h1>みろく流・神仏ご縁鑑定</h1><div>三つのご縁が紡ぐ、あんたの物語</div></header><section class="panel no-print"><h2>鑑定する人の情報</h2><div class="formgrid"><label>お名前・ニックネーム<input id="name" maxlength="35" placeholder="例：うめこ" autocomplete="off"></label><label>生年月日<input id="birth" type="date" required></label></div><div class="formgrid" style="margin-top:12px"><label>年の十二支の区切り<select id="boundary"><option value="jan">西暦1月1日区切り（試作版の初期設定）</option><option value="manual">十二支を手動指定する</option></select></label><label id="manualBox" class="hidden">十二支<select id="manualZ"><option>子</option><option>丑</option><option>寅</option><option>卯</option><option>辰</option><option>巳</option><option>午</option><option>未</option><option>申</option><option>酉</option><option>戌</option><option>亥</option></select></label></div><p class="note">年初の干支には暦法・流儀による違いがあるため、必要なら十二支を手動指定してな。入力した名前と生年月日はサーバーに送信せず、ブラウザにも保存せえへん。</p><button id="go">ご縁を鑑定する</button><p id="error" role="alert"></p></section><div id="result" class="hidden" aria-live="polite"><article class="sheet"><div class="tag">鑑定書 1 / 2</div><h2 id="resultTitle"></h2><p id="meta"></p><div class="trio"><div class="tile"><div class="emoji">⛩️</div><small>誕生日の神様</small><strong id="godName"></strong><small id="godRole"></small></div><div class="tile"><div class="emoji">🪷</div><small>誕生日の仏様</small><strong id="buddhaName"></strong><small id="buddhaRole"></small></div><div class="tile"><div class="emoji">✨</div><small>十二支の守り本尊</small><strong id="guardianName"></strong><small id="guardianRole"></small></div></div><h2>三つのご縁が紡ぐ物語</h2><p class="lead" id="headline"></p><p id="story1"></p><p id="story2"></p><p id="story3"></p><h2>心が迷ったとき</h2><p id="heart"></p><h2>みろくからのひとこと</h2><div class="quote" id="closing"></div></article><article class="sheet pagebreak"><div class="tag">鑑定書 2 / 2</div><h2>神仏それぞれの由緒とメッセージ</h2><h3 id="godHead"></h3><p id="godInfo"></p><p id="godText"></p><h3 id="buddhaHead"></h3><p id="buddhaInfo"></p><p id="buddhaText"></p><h3 id="guardianHead"></h3><p id="guardianInfo"></p><p id="guardianText"></p><h2>今日からの開運行動</h2><p id="action"></p><h2>鑑定について・出典</h2><p class="note">本書は歴史的な神仏の配当と象徴を手がかりにした、みろく流の創作的な読み物です。特定の神仏による個人的な守護、性格、将来、健康状態を証明・保証するものではありません。三十番神には複数の配当系統があり、本版は本光寺・善学寺掲載の系統を基準としています。31日の神様は別資料の補足配当「五番善神」を採用。三十日秘仏に31日目は設定していません。</p><p class="source">配当の参照先：日蓮宗本光寺「三十番神とは」／日蓮宗善学寺「三十番神」／四国霊場第22番札所・平等寺「縁日大全」 https://byodoji.online/articles/ennichi ／日蓮宗真成寺「三十番神様」。個別の由緒は各社寺公式情報で今後追加照合。資料確認日：2026年11月16日。公開日不明の資料を含みます。<br>十二支は西暦年1月1日区切りを便宜上の初期設定としています。伝統的な立春・旧正月の年境界と異なる場合があります。</p></article><div class="actions no-print"><button id="save1">画像保存（1枚目）</button><button id="save2">画像保存（2枚目）</button><button id="print">A4で印刷・PDF保存</button><button id="reset" class="secondary">別の人を鑑定</button></div><p class="note no-print">iPhoneでは「画像保存」を押した後、表示された画像を長押しして「写真に保存」を選んでな。画像は端末内で作成し、外部に送信しません。</p></div></div><script>
+:root{--ink:#263d32;--purple:#245d49;--gold:#b49a57;--paper:#fffefa;--bg:#eaf2ec}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,'Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif;line-height:1.8}.wrap{max-width:850px;margin:auto;padding:20px 15px 50px}header{text-align:center;padding:25px 8px}header small{letter-spacing:.2em;color:var(--gold)}h1{font-size:clamp(24px,5vw,35px);margin:5px 0;color:var(--purple)}h2{font-size:21px;color:var(--purple);border-bottom:1px solid #bfd7c7;padding-bottom:7px}h3{color:var(--purple);margin:10px 0}.panel,.sheet{background:var(--paper);border:1px solid #cbded0;border-radius:15px;padding:22px;margin:14px 0;box-shadow:0 3px 12px #36273a0b}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}label{display:block;font-weight:700;font-size:14px}input,select{display:block;width:100%;margin-top:5px;padding:11px;border:1px solid #a9c8b4;border-radius:8px;background:white;font:inherit;font-size:16px}button{cursor:pointer;border:0;border-radius:10px;padding:13px 22px;font-size:16px;font-weight:700;background:var(--purple);color:white}button.secondary{background:#8c744c}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #84b79a}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.note{font-size:12px;color:#567062}.lead{font-size:19px;font-weight:700;color:var(--purple)}.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.tile{border:1px solid #c8ded0;border-radius:12px;padding:13px;text-align:center;background:#fff}.tile .emoji{font-size:28px}.tile strong{display:block;font-size:16px}.tile small{color:#557363}.tag{display:inline-block;border:1px solid #b6c89b;color:#567047;border-radius:30px;padding:2px 11px;font-size:12px}.quote{background:#edf6ee;border-left:4px solid var(--purple);padding:12px 16px;border-radius:5px}.pagebreak{break-before:page}.source{font-size:12px;overflow-wrap:anywhere}.hidden{display:none!important}#error{color:#a22929;font-weight:bold}@media(max-width:550px){.formgrid,.trio{grid-template-columns:1fr}.panel,.sheet{padding:17px}.tile{text-align:left}.tile .emoji{display:inline;margin-right:8px}}@page{size:A4 portrait;margin:13mm}@media print{body{background:white;font-size:10.5pt;line-height:1.6}.wrap{padding:0;max-width:none}header,.panel,.actions,.no-print{display:none!important}.sheet{border:none;box-shadow:none;margin:0;padding:0;border-radius:0}h2{font-size:16pt}.trio{grid-template-columns:repeat(3,1fr)}.tile{padding:9px}.tile strong{font-size:10pt}.pagebreak{break-before:page}p{margin:8px 0}.note,.source{font-size:8pt}#result{display:block!important}}
+
+.onepage{border:2px solid #b49a57;background:#fffefa}.onepage h2{font-size:18px;margin:12px 0 6px;padding-bottom:3px}.onepage p{margin:6px 0}.onepage .lead{font-size:17px;margin:5px 0}.onepage .tile{padding:8px}.onepage .tile .emoji{font-size:19px}.onepage .tile strong{font-size:13px}.onepage .tile small{font-size:11px}.onepage .quote{padding:7px 12px}.compact-details{display:grid;gap:5px;font-size:12px;line-height:1.45}.compact-details>div{border-bottom:1px solid #d6e4d8;padding-bottom:4px}.compact-details strong{display:block;color:#245d49}.compact-details span{display:inline}.compact-details span+span:before{content:" ／ ";color:#9ab49d}.onepage .source{font-size:10px}.onepage .note{font-size:10px}@media print{@page{size:A4 portrait;margin:8mm}body{font-size:9pt;line-height:1.35}.onepage{padding:7mm;border:1px solid #b49a57;break-inside:avoid}.onepage h2{font-size:12pt;margin:7px 0 3px}.onepage .lead{font-size:11pt}.onepage .tile{padding:4px}.onepage .quote{padding:5px 8px}.compact-details{font-size:8pt;line-height:1.3}.onepage .note,.onepage .source{font-size:7pt}}
+</style></head><body><div class="wrap"><header><small>MIROKU ORIGINAL READING</small><h1>みろく流・神仏ご縁鑑定</h1><div>三つのご縁が紡ぐ、あんたの物語</div></header><section class="panel no-print"><h2>鑑定する人の情報</h2><div class="formgrid"><label>お名前・ニックネーム<input id="name" maxlength="35" placeholder="例：うめこ" autocomplete="off"></label><label>生年月日<input id="birth" type="date" required></label></div><div class="formgrid" style="margin-top:12px"><label>年の十二支の区切り<select id="boundary"><option value="jan">西暦1月1日区切り（試作版の初期設定）</option><option value="manual">十二支を手動指定する</option></select></label><label id="manualBox" class="hidden">十二支<select id="manualZ"><option>子</option><option>丑</option><option>寅</option><option>卯</option><option>辰</option><option>巳</option><option>午</option><option>未</option><option>申</option><option>酉</option><option>戌</option><option>亥</option></select></label></div><p class="note">年初の干支には暦法・流儀による違いがあるため、必要なら十二支を手動指定してな。入力した名前と生年月日はサーバーに送信せず、ブラウザにも保存せえへん。</p><button id="go">ご縁を鑑定する</button><p id="error" role="alert"></p></section><div id="result" class="hidden" aria-live="polite"><article class="sheet onepage"><div class="tag">神仏ご縁鑑定書</div><h2 id="resultTitle"></h2><p id="meta"></p><div class="trio"><div class="tile"><div class="emoji">⛩️</div><small>誕生日の神様</small><strong id="godName"></strong><small id="godRole"></small></div><div class="tile"><div class="emoji">🪷</div><small>誕生日の仏様</small><strong id="buddhaName"></strong><small id="buddhaRole"></small></div><div class="tile"><div class="emoji">✨</div><small>十二支の守り本尊</small><strong id="guardianName"></strong><small id="guardianRole"></small></div></div><h2>三つのご縁が紡ぐ物語</h2><p class="lead" id="headline"></p><p id="story1"></p><p id="story2"></p><p id="story3"></p><h2>心が迷ったとき</h2><p id="heart"></p><h2>みろくからのひとこと</h2><div class="quote" id="closing"></div><h2>三つのご縁を日々に生かす</h2><div class="compact-details"><div><strong id="godHead"></strong><span id="godInfo"></span><span id="godText"></span></div><div><strong id="buddhaHead"></strong><span id="buddhaInfo"></span><span id="buddhaText"></span></div><div><strong id="guardianHead"></strong><span id="guardianInfo"></span><span id="guardianText"></span></div></div><h2>今日からの開運行動</h2><p id="action"></p><p class="note">本書は神仏の配当をもとにした、みろく流の創作鑑定です。性格・運命・個人的な守護を保証するものではありません。三十番神には複数の系統があり、本版は本光寺・善学寺掲載の系統を採用。31日の神様は別資料の補足配当を採用し、三十日秘仏の31日目は設定していません。</p><p class="source">参照：日蓮宗本光寺・善学寺「三十番神」、平等寺「縁日大全」、日蓮宗真成寺「三十番神様」。由緒は一部照合継続中。参照資料の初回確認：2026年11月16日。十二支は初期設定では西暦1月1日区切り（伝統的な暦の境界と異なる場合あり）。</p></article><div class="actions no-print"><button id="save1">鑑定書を画像保存（A4・1枚）</button><button id="print">A4で印刷・PDF保存</button><button id="reset" class="secondary">別の人を鑑定</button></div><p class="note no-print">iPhoneでは画像保存後、開いた画像を長押しして「写真に保存」。画像は端末内で作成し、外部に送信しません。</p></div></div><script>
 'use strict';
 const gods=[
 ['伊勢大明神','光と感謝','伊勢神宮に関係する神号。天照大御神などの信仰と結びつく。','目の前の恵みを見つける'],
@@ -43,66 +45,39 @@ const zodiacs='子丑寅卯辰巳午未申酉戌亥';const $=id=>document.getEle
 $('boundary').addEventListener('change',()=>{$('manualBox').classList.toggle('hidden',$('boundary').value!=='manual')});
 $('go').addEventListener('click',()=>{const s=$('birth').value;const name=$('name').value.trim()||'あなた';if(!/^\d{4}-\d{2}-\d{2}$/.test(s)){set('error','生年月日を入力してな。');return}const [y,m,d]=s.split('-').map(Number);const date=new Date(y,m-1,d);if(date.getFullYear()!==y||date.getMonth()!==m-1||date.getDate()!==d||y<1||date>new Date()){set('error','有効な過去の生年月日を入力してな。');return}set('error','');const z=$('boundary').value==='manual'?$('manualZ').value:zodiacs[((y-4)%12+12)%12];const g=gods[d-1],b=d===31?null:buddhas[d-1],p=guardians[z];set('resultTitle',`${name}さんの神仏ご縁鑑定`);set('meta',`${y}年${m}月${d}日生まれ ／ ${z}年`);set('godName',g[0]);set('godRole',g[1]);set('buddhaName',b?b[0]:'31日特別解説');set('buddhaRole',b?b[1]:'五番善神の仏教的な象徴');set('guardianName',p[0]);set('guardianRole',p[1]);set('headline',`${g[1]}、${b?b[1]:'支え合う心'}、そして${p[1]}。`);set('story1',`${name}さん。${d}日の神号は「${g[0]}」。みろく流では「${g[1]}」という視点を重ねるで。これは性格を決めつける言葉やなく、毎日を見直すためのヒントや。`);set('story2',b?`同じ${d}日に配当される仏様は「${b[0]}」。心が揺れたときには「${b[1]}」を思い出してみよ。${b[2]}`:'31日は三十日秘仏の伝統的な配当の対象外や。そこで、五番善神に含まれる菩薩や諸天の信仰を手がかりに、「一人で抱えず支え合う心」を補足として紹介するで。');set('story3',`そして${z}年の守り本尊は「${p[0]}」。このご縁に重ねる行動の指針は「${p[1]}」。神様から姿勢を、仏様から心の整え方を、守り本尊から今日の一歩を受け取る――そんな読み方が、みろく流や。`);set('heart',b?b[2]:'頼れる人や使える知恵を、一つ思い出してみよ。助けを借りるのも大切な力や。');set('closing',`${g[3]}。ほんで、${p[3]} ${name}さん、自分のペースでええんやで。`);set('godHead',`${d}日｜${g[0]}`);set('godInfo',g[2]);set('godText',`みろく流の読み方：「${g[1]}」。今日は「${g[3]}」を意識してみよ。`);set('buddhaHead',b?`${d}日｜${b[0]}`:'31日｜仏教的な補足解説');set('buddhaInfo',b?'三十日秘仏の配当に基づく名称。個別の教義・由緒は確認作業中のため、以下の鑑定文を公式な教義と混同しないでください。':'三十日秘仏に31日目の正式な配当は確認できていません。五番善神の信仰に含まれる菩薩・諸天を紹介する補足構成です。');set('buddhaText',b?`みろく流の心の処方箋：「${b[1]}」。${b[2]}`:'みろく流の心の処方箋：「支え合う心」。何でも自分だけで解決しようとせんでええ。');set('guardianHead',`${z}年｜${p[0]}`);set('guardianInfo',`十二支の守り本尊の配当に基づく名称。${z}年に対応。`);set('guardianText',`みろく流の行動テーマ：「${p[1]}」。${p[3]}`);set('action',`① ${g[3]}。 ② ${b?b[2]:'周囲の力を借りる方法を一つ考える。'} ③ ${p[2]}。`);$('result').classList.remove('hidden');$('result').scrollIntoView({behavior:'smooth',block:'start'});});$('print').addEventListener('click',()=>window.print());$('reset').addEventListener('click',()=>{$('result').classList.add('hidden');window.scrollTo({top:0,behavior:'smooth'})});
 
-// 外部ライブラリ不要のA4画像描画。Safariでも画像を長押し保存できるようにする。
-async function savePage(page){
-  if($('result').classList.contains('hidden'))return;
-  const W=1240,H=1754,pad=92;
-  const canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;
-  const ctx=canvas.getContext('2d');
-  ctx.fillStyle='#fffdf9';ctx.fillRect(0,0,W,H);
-  ctx.strokeStyle='#d4b878';ctx.lineWidth=5;ctx.strokeRect(32,32,W-64,H-64);
-  let y=115;
-  const font=(size,bold=false)=>`${bold?'bold ':''}${size}px -apple-system, 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif`;
-  function lines(str,maxWidth,size,bold=false){
-    ctx.font=font(size,bold);const out=[];let line='';
-    for(const c of String(str||'')){
-      if(c==='\n'){out.push(line);line='';continue}
-      if(ctx.measureText(line+c).width>maxWidth&&line){out.push(line);line=c}else line+=c;
-    }
-    if(line)out.push(line);return out;
-  }
-  function draw(str,size=27,bold=false,color='#392c39',gap=12){
-    ctx.fillStyle=color;ctx.font=font(size,bold);const lh=size*1.65;
-    for(const line of lines(str,W-pad*2,size,bold)){
-      if(y+lh>H-85)throw Error('文章が画像の範囲を超えました。');
-      ctx.fillText(line,pad,y);y+=lh;
-    }
-    y+=gap;
-  }
-  function title(str){y+=10;draw(str,34,true,'#60436f',10);ctx.strokeStyle='#d8c9db';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(pad,y);ctx.lineTo(W-pad,y);ctx.stroke();y+=27}
-  function val(id){return $(id).textContent||''}
-  try{
-    draw('みろく流・神仏ご縁鑑定',39,true,'#60436f',14);
-    draw(val('resultTitle'),29,true,'#392c39',4);
-    draw(val('meta'),23,false,'#806d7c',20);
-    if(page===1){
-      title('三つのご縁');
-      draw('⛩  神様：'+val('godName')+'　／　'+val('godRole'),27,true);
-      draw('仏様：'+val('buddhaName')+'　／　'+val('buddhaRole'),27,true);
-      draw('守り本尊：'+val('guardianName')+'　／　'+val('guardianRole'),27,true);
-      title('三つのご縁が紡ぐ物語');
-      draw(val('headline'),30,true,'#60436f',18);
-      draw(val('story1'));draw(val('story2'));draw(val('story3'));
-      title('心が迷ったとき');draw(val('heart'));
-      title('みろくからのひとこと');draw(val('closing'),28,true);
-    }else{
-      title('神仏それぞれの由緒とメッセージ');
-      draw(val('godHead'),30,true,'#60436f',7);draw(val('godInfo'));draw(val('godText'));
-      draw(val('buddhaHead'),30,true,'#60436f',7);draw(val('buddhaInfo'));draw(val('buddhaText'));
-      draw(val('guardianHead'),30,true,'#60436f',7);draw(val('guardianInfo'));draw(val('guardianText'));
-      title('今日からの開運行動');draw(val('action'));
-      title('鑑定について');
-      draw('神仏の配当と象徴を手がかりにした、みろく流の創作鑑定です。性格・運命・個人的な守護を保証するものではありません。',22);
-      draw('資料確認日：2026年11月16日。詳細な出典はHTML版の鑑定書をご覧ください。',20);
-    }
-    ctx.fillStyle='#8a7d87';ctx.font=font(21);
-    ctx.fillText(`MIROKU  |  ${page} / 2`,pad,H-70);
-    const url=canvas.toDataURL('image/png');
-    const win=window.open('','_blank');
-    if(win){win.document.write('<!doctype html><html lang="ja"><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>鑑定書画像</title></head><body style="margin:0;background:#eee;text-align:center"><p style="font:15px sans-serif;padding:8px">画像を長押し →「写真に保存」</p><img style="width:100%;max-width:800px" src="'+url+'"></body></html>');win.document.close()}
-    else {const a=document.createElement('a');a.href=url;a.download=`みろく神仏ご縁鑑定_${page}.png`;document.body.appendChild(a);a.click();a.remove();alert('画像が開かない場合はSafariのポップアップ設定を確認してな。')}
-  }catch(e){alert('画像の作成に失敗したで：'+e.message+' A4印刷・PDF保存も試してな。')}
+// A4縦1枚のPNG。長文でも1枚に収めるため文字サイズを自動調整。
+function saveOnePage(){
+ if($('result').classList.contains('hidden'))return;
+ const W=1240,H=1754,pad=88;
+ const canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;
+ const ctx=canvas.getContext('2d');
+ const val=id=>$(id).textContent||'';
+ const entries=[
+  ['header','みろく流・神仏ご縁鑑定'],['name',val('resultTitle')],['meta',val('meta')],
+  ['section','三つのご縁'],['item','神様｜'+val('godName')+'　—　'+val('godRole')],['item','仏様｜'+val('buddhaName')+'　—　'+val('buddhaRole')],['item','守り本尊｜'+val('guardianName')+'　—　'+val('guardianRole')],
+  ['section','三つのご縁が紡ぐ物語'],['lead',val('headline')],['body',val('story1')],['body',val('story2')],['body',val('story3')],
+  ['section','心が迷ったとき'],['body',val('heart')],['section','みろくからのひとこと'],['lead',val('closing')],
+  ['section','神仏それぞれのメッセージ'],['small',val('godHead')+'：'+val('godInfo')+' '+val('godText')],['small',val('buddhaHead')+'：'+val('buddhaInfo')+' '+val('buddhaText')],['small',val('guardianHead')+'：'+val('guardianInfo')+' '+val('guardianText')],
+  ['section','今日からの開運行動'],['body',val('action')],
+  ['foot','神仏の配当と象徴に基づく、みろく流の創作鑑定です。性格・運命・個人的な守護を保証しません。31日の仏様は伝統的配当の対象外です。'],
+  ['foot','資料：日蓮宗本光寺・善学寺、平等寺「縁日大全」、日蓮宗真成寺。資料初回確認：2026年11月16日。個別由緒は照合継続中。十二支は原則西暦年区切り。']
+ ];
+ const base={header:39,name:27,meta:21,section:29,item:25,lead:27,body:24,small:21,foot:17};
+ const bold=new Set(['header','name','section','item','lead']);
+ function f(type,scale){return `${bold.has(type)?'bold ':''}${Math.round(base[type]*scale)}px -apple-system,'Hiragino Kaku Gothic ProN','Yu Gothic',sans-serif`}
+ function wrap(txt,type,scale){ctx.font=f(type,scale);let lines=[],line='';for(const c of txt){if(c==='\n'){lines.push(line);line='';continue}if(ctx.measureText(line+c).width>W-2*pad&&line){lines.push(line);line=c}else line+=c}if(line)lines.push(line);return lines}
+ function metrics(scale){let height=0;for(const [type,t] of entries){const sz=Math.round(base[type]*scale),lh=sz*(type==='body'?1.55:1.48);height+=wrap(t,type,scale).length*lh+(type==='section'?20:type==='body'?10:type==='small'?9:12)}return height}
+ let scale=1;while(metrics(scale)>H-270&&scale>.63)scale-=.025;
+ ctx.fillStyle='#fffefa';ctx.fillRect(0,0,W,H);ctx.strokeStyle='#b49a57';ctx.lineWidth=5;ctx.strokeRect(30,30,W-60,H-60);
+ ctx.fillStyle='#e9f2ea';ctx.fillRect(33,33,W-66,21);
+ let y=110;
+ for(const [type,t] of entries){const sz=Math.round(base[type]*scale),lh=sz*(type==='body'?1.55:1.48),color=type==='header'||type==='section'||type==='lead'?'#245d49':type==='meta'||type==='foot'?'#597264':'#263d32';ctx.font=f(type,scale);ctx.fillStyle=color;
+ if(type==='section'){y+=7;ctx.strokeStyle='#b9d4c1';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(pad,y+12);ctx.lineTo(W-pad,y+12);ctx.stroke();y+=25}
+ for(const line of wrap(t,type,scale)){ctx.fillText(line,pad,y);y+=lh}
+ y+=(type==='body'?10:type==='small'?9:12);
+ }
+ ctx.fillStyle='#698575';ctx.font='19px sans-serif';ctx.fillText('MIROKU  |  1 / 1',pad,H-66);
+ try{const url=canvas.toDataURL('image/png');const win=window.open('','_blank');if(win){win.document.write('<!doctype html><html lang="ja"><head><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0;background:#eaf2ec;text-align:center"><p style="font:15px sans-serif;padding:8px">画像を長押し →「写真に保存」</p><img style="width:100%;max-width:800px" src="'+url+'"></body></html>');win.document.close()}else{const a=document.createElement('a');a.href=url;a.download='みろく神仏ご縁鑑定_A4.png';document.body.appendChild(a);a.click();a.remove()}}catch(e){alert('画像作成に失敗したで：'+e.message)}
 }
-$('save1').addEventListener('click',()=>savePage(1));
-$('save2').addEventListener('click',()=>savePage(2));
+$('save1').addEventListener('click',saveOnePage);
 </script></body></html>
