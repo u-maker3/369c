@@ -96,23 +96,28 @@ const strengthModes=[
 ];
 function themeMode(t){return strengthModes.find(a=>new RegExp(a[0]).test(t))||['','見極める力','目の前のことを丁寧に見直す視点がある。']}
 function buildStory(v){
- const mode=themeMode(v.g[1]), heart=v.b?v.b[1]:'協力と支え合い';
- const origin=deityContexts[v.d];
- const godLine=`【ご縁の由緒】${origin} ここから「${v.g[1]}」を読みの入口にするんが、みろく流やで。`;
- const budLine=v.b?`【心に灯す仏様】${v.d}日の三十日秘仏は${v.b[0]}。この鑑定では「${heart}」を、しんどい日に立ち戻る心の合言葉にする。${v.b[2]}`:`【31日だけの特別な読み】三十日秘仏に31日目の定まった配当は確認できへん。五番善神に含まれる仏教的な象徴から、誰かと支え合う知恵を読み取るで。`;
- const relation= /決断|勇気|突破|挑戦|覚悟|信念/.test(v.g[1])&&/休息|受容|安心|静けさ|いたわり|寄り添/.test(heart)?'進む力と休む力は、反対やなくて両方必要なもの。': /実り|育|準備|継続/.test(v.g[1])&&/希望|可能性|喜び/.test(heart)?'結果を育てる時間と、未来を信じる気持ちは、互いを支える。':'神様の姿勢と仏様の心の整え方は、同じことを言うてるわけちゃう。';
- const strength=`【あんたに渡したい強み】この組合せの鍵は「${mode[1]}」。${mode[2]} ${relation} 決めつけやなく、今日の自分を見直す鏡として使ってな。`;
- const caution=`【落とし穴】${v.g[1]}を大切にするあまり、${v.d%3===0?'周囲の期待に合わせすぎる':v.d%3===1?'準備ばかりで一歩が遅れる':'自分のやり方にこだわりすぎる'}ことには注意や。${heart}を思い出して、力の入れどころを選ぼう。`;
- const guardLine=`【行動の鍵】${v.z}年の守り本尊は${v.p[0]}。その象徴を「${v.p[1]}」として暮らしに重ねるなら、${v.p[2]}。${guardianInsights[v.z]}`;
- return [godLine,budLine,strength,caution,guardLine];
+ const theme=v.g[1],heart=v.b?v.b[1]:'支え合う知恵',origin=deityContexts[v.d];
+ const drive=/決断|勇気|挑戦|突破|信念|守り|自立/.test(theme);
+ const care=/実り|育|暮らし|土台|準備|継続|調和|縁/.test(theme);
+ const calm=/休息|静けさ|受容|安心|いたわり|寄り添|調和/.test(heart);
+ const light=/希望|可能性|喜び|明るさ|光/.test(heart);
+ const tension=drive&&calm?'進む力と立ち止まる力は、敵同士ちゃう。どちらかを捨てるより、使う順番を見極めることが鍵になる。':care&&light?'希望は待つだけのもんやない。日々の手入れがあるから、未来への期待も地に足がつくんよ。':drive&&light?'勢いがあるときほど、何のために進むのか確かめたい。希望を行動につなぐには、目的が要るんや。':'神様の象徴は外へ向ける姿勢、仏様の象徴は内側を整える視点。違う役目があるからこそ、組み合わせる意味がある。';
+ const strength=drive?'決める力は、誰かを押しのけることやない。守りたいものを自分の言葉で選び直せること。':care?'小さな変化を見逃さず、続けることに価値を見いだす視点。目立つ成果だけが前進ちゃうで。':'変化の中でも、自分に必要なものを選び取る視点。状況が変わったら、選び直してもええんや。';
+ const shadow=drive?'正しさを急いで決めると、人の気持ちも自分の迷いも置いてきぼりになる。':care?'周りを整えることに夢中になると、自分の願いが最後になりやすい。':'考えを巡らせるばかりで、動くきっかけを逃すこともある。';
+ const history=`【ご縁の背景】${origin} これは信仰に伝わる話。ここから先は、みろく流が暮らしに引き寄せて読む物語やで。`;
+ const bud=v.b?`【心に灯すもの】${v.b[0]}に重ねるのは「${heart}」。${v.b[2]} 神様の「${theme}」と並べたとき、${tension}`:`【31日だけの読み】三十日秘仏に31日目の定まった配当は確認できへん。五番善神の複数の尊格にちなみ、「一人で抱えず、力を借りる」という視点を添えるで。${tension}`;
+ const core=`【このご縁から見える持ち味】${strength} ${dayInsights[v.d-1]}`;
+ const pit=`【気づいてほしい落とし穴】${shadow} ${calm?'休むことに罪悪感を持たんとき。':light?'希望だけで無理を重ねんとき。':'立ち止まって、ほんまの気持ちを聞いてみよ。'} この鑑定は性格の断定やなく、選び方を考えるための鏡やで。`;
+ const act=`【明日につなぐ一歩】${v.z}年の守り本尊${v.p[0]}には「${v.p[1]}」を重ねる。${v.p[2]}。今日ひとつだけ試してみよ。できたかどうかより、自分で選んだことを大切にな。`;
+ return [history,bud,core,pit,act];
 }
 const mirokuClosings=[
 '光を探す前に、今日の自分をちょっと褒めたってな。','守るもんを決めるんはええ。でも自分まで置き去りにしたらあかんで。','心の大掃除は一気にせんでええ。まず一つ、手放そか。','立派な土台は地味な毎日から。焦らんと積み上げよ。','やり直せるんは、ちゃんと生きてる証拠やで。','実りが遅くても、育てた時間は消えへん。','信頼は口だけでは貯まらん。今日の小さな約束からや。','縁は大切。でも無理してつながる必要はないで。','居場所は探すだけやない。自分で整えてもええんや。','優しさの押し売りにならんよう、自分の心にも聞いてみよ。','ええ距離感は冷たさちゃう。長く仲良くする知恵やで。','勢いは武器。でも行き先まで勢い任せにせんとき。','受け継ぐもんと手放すもん、あんたが選んでええ。','芽が出るまでの時間も、ちゃんと物語の一部や。','決断は切り捨てることちゃう。大切なもんを選ぶことや。','責任感が強い日ほど、自分の足元も確かめよ。','当たり前の暮らしを整える。案外それが一番の近道や。','風向きが変わったら、意地張らず帆を動かしたらええ。','新しい船出の前に、古い荷物を一つ下ろそか。','勇気は突進と違う。納得して踏み出す一歩が大事や。','用心深いのは悪いことちゃう。考えたら、あとは一歩や。','大勝負せんでもええ。昨日の自分を一歩越えたら十分や。','芯がある人ほど、時には柔らかく曲がれるんやで。','全部に勝とうとせんでええ。大事な勝負を選びよし。','準備してる自分を地味やと思わんといて。未来の味方や。','乗り越えるだけやなく、その先で何を育てたいか考えよ。','守るべき信念があるなら、無駄な争いは手放してええ。','粘るんも強さ。方向を変えるんも、また強さや。','自分の意思は声にしてええ。誰かを責める必要はないで。','遠くへ行く日ほど、帰ってくる場所も大切にしよ。','ひとりで全部抱えんでええ。頼れる縁もあんたの財産や。'
 ];
 function mirokuClosing(v){
- const c=mirokuClosings[v.d-1];
- const tail={子:'優しさの残高、自分にも残しときや。',丑:'学んだら一つ使ってみよ。',寅:'知恵は動かしてこそ生きるで。',卯:'答えより先に問いを整えよ。',辰:'完璧待ちは今日で閉店や。',巳:'小さく動けば景色が変わる。',午:'急ぐ前に行き先を見よ。',未:'違う角度から眺めてみよ。',申:'一歩引くのも立派な前進や。',酉:'守るために手放す勇気もいる。',戌:'我慢と慈悲を混ぜたらあかん。',亥:'自分の安心も守ったってな。'};
- return c+' '+tail[v.z];
+ const line=mirokuClosings[v.d-1];
+ // ひとことは連結文ではなく、一つの独立した決めゼリフにする。
+ return line;
 }
 function draw(v){
  c.clearRect(0,0,W,H);let bg=c.createLinearGradient(0,0,W,H);bg.addColorStop(0,'#f4f9e9');bg.addColorStop(.48,'#fffaf0');bg.addColorStop(1,'#e7f1df');c.fillStyle=bg;c.fillRect(0,0,W,H);
@@ -141,7 +146,7 @@ function draw(v){
  rows.forEach((r,i)=>{let y=1289+i*66;rr(84,y,1072,60,12,'rgba(255,254,247,.94)','#d4bf80',2);rr(97,y+8,280,43,10,'#e6efdf');text(r[0],237,y+35,19,'#14563d',700,'center');const ar=lines(r[1],744,19,500);ar.slice(0,2).forEach((t,j)=>text(t,397,y+25+j*23,19,'#2d4a39',500))});
  band('みろくのひとこと',1502);
  const close=mirokuClosing(v);let cy=1581;const cl=lines(close,1030,21,700);cl.slice(0,3).forEach(t=>{text(t,104,cy,21,'#18563d',700);cy+=30});
- c.fillStyle='#10533b';c.fillRect(48,1673,W-96,39);text('みろく流の創作鑑定　｜　参考資料確認：2026年　｜　神仏の配当には諸説あり',620,1699,16,'#fff8d9',600,'center');
+ c.fillStyle='#10533b';c.fillRect(48,1673,W-96,39);text('みろく流の創作鑑定　｜　参考資料整理：2026年　｜　神仏の配当には諸説あり',620,1699,16,'#fff8d9',600,'center');
 }
 function make(){let s=$('birth').value,name=$('name').value.trim()||'あなた';if(!/^\d{4}-\d{2}-\d{2}$/.test(s)){showError('生年月日を入力してな。');return}let [y,m,d]=s.split('-').map(Number),dt=new Date(0);dt.setFullYear(y,m-1,d);if(y<1||dt.getFullYear()!==y||dt.getMonth()!==m-1||dt.getDate()!==d||dt>new Date()){showError('有効な生年月日を入力してな。');return}showError('');let z=$('boundary').value==='manual'?$('manualZ').value:zodiacs[((y-4)%12+12)%12];let v={name,y,m,d,z,g:gods[d-1],b:d===31?null:buddhas[d-1],p:guardians[z]};draw(v);$('preview').classList.remove('hidden');$('save').disabled=false;$('print').disabled=false;$('preview').scrollIntoView({behavior:'smooth'});}
 function showError(s){$('error').textContent=s}
