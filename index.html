@@ -55,12 +55,21 @@ const dayInsights=[
 const guardianInsights={子:'人を助ける手を伸ばすなら、自分を休ませる手も忘れんとこ。',丑:'学んだことをひとつ使えば、知識は今日の味方になる。',寅:'知っているだけで終わらず、小さな実践につなげよう。',卯:'迷ったら情報を増やすより、いちばん大切な問いを決めてみよ。',辰:'気持ちが決まったら、完璧を待たず五分だけ動こう。',巳:'理想を語るだけで終わらせず、今日できることを選ぼう。',午:'速さを競うより、どこへ向かうかを確かめることが先や。',未:'自分の正解から一歩離れて、違う立場も見てみよう。',申:'全体を見渡したら、意外な抜け道が見つかるかもしれん。',酉:'守ると決めたことのために、やめることもひとつ選ぼう。',戌:'誰かを受け入れるときも、自分の安心は置き去りにせんとこ。',亥:'人に優しくするのと、自分が我慢するのは別もんやで。'};
 function godExtra(theme){if(/決断|勇気|挑戦|突破/.test(theme))return '迷ったときは、怖さよりも大切にしたいものを確かめよ。';if(/実り|育|暮らし|土台/.test(theme))return '派手な結果より、毎日の積み重ねが未来を育てるんや。';if(/調和|縁|信頼|居場所/.test(theme))return '人に合わせるだけやなく、自分の居心地も大切にしてな。';return '目の前の出来事を、自分のペースで見つめ直してみよ。'}
 function buildStory(v){
- const d=dayInsights[v.d-1], g=v.g,b=v.b,p=v.p;
- const a=`${v.d}日の神号は「${g[0]}」。このご縁から、みろく流では「${g[1]}」を人生の軸として読むで。${d}`;
- const bb=b?`心を整える手がかりは「${b[0]}」の「${b[1]}」。${b[2]} 強く進むだけやなく、立ち止まって自分の気持ちを聞く余白も持ちたいところや。`:`31日は三十日秘仏の配当外。ここでは五番善神に含まれる仏教的な象徴から、「助けを借りる知恵」を補足して読むで。一人で全部抱え込まんでええ。`;
- const cc=`そして${v.z}年の守り本尊「${p[0]}」は、「${p[1]}」を行動のヒントにする。${guardianInsights[v.z]} 三つのご縁は未来を決める宣告やない。今日の選び方を見直すための、あんた専用の問いかけや。`;
- return [a,bb,cc];
+ const god=v.g[1], bud=v.b?v.b[1]:'支え合う心', guard=v.p[1];
+ const day=dayInsights[v.d-1];
+ const godLine=`${v.g[0]}は、${v.g[2]}。この由緒を手がかりに、みろく流では「${god}」を人生の軸に据えるで。${day}`;
+ const budLine=v.b?`心を整える側にいるのは${v.b[0]}。ここに重ねる「${bud}」は、何かを証明するためやなく、自分の気持ちに戻るための視点や。${v.b[2]}`:`31日は三十日秘仏の配当が確認できへんため、五番善神の仏教的な象徴を補足して読むで。一人で背負うより、頼れる縁を見つける知恵を大切にしよ。`;
+ const guardianLine=`${v.z}年の守り本尊は${v.p[0]}。「${guard}」を暮らしでどう使うかが三つ目の鍵や。${guardianInsights[v.z]}`;
+ const strength=`【このご縁から見つける強み】${god}を大事にしながら、${bud}という別の視点も持てること。どっちか一つに決めつけんでええ。違う力を合わせられるのが、この組合せのおもしろさや。`;
+ const caution=`【気をつけたいこと】${god}を意識しすぎて、何でも自分だけで片づけようとせんこと。迷う日は${bud}に立ち戻り、今の自分に必要な余白を作ってみよ。`;
+ const action=`【今日からの一歩】${v.p[2]}。大きな変化を約束する鑑定やない。今日の選択をひとつ丁寧にするための、みろく流の問いかけやで。`;
+ return [godLine,budLine,guardianLine,strength,caution,action];
 }
+const mirokuClosings=[
+'光を探す前に、今日の自分をちょっと褒めたってな。','守るもんを決めるんはええ。でも自分まで置き去りにしたらあかんで。','心の大掃除は一気にせんでええ。まず一つ、手放そか。','立派な土台は地味な毎日から。焦らんと積み上げよ。','やり直せるんは、ちゃんと生きてる証拠やで。','実りが遅くても、育てた時間は消えへん。','信頼は口だけでは貯まらん。今日の小さな約束からや。','縁は大切。でも無理してつながる必要はないで。','居場所は探すだけやない。自分で整えてもええんや。','優しさの押し売りにならんよう、自分の心にも聞いてみよ。','ええ距離感は冷たさちゃう。長く仲良くする知恵やで。','勢いは武器。でも行き先まで勢い任せにせんとき。','受け継ぐもんと手放すもん、あんたが選んでええ。','芽が出るまでの時間も、ちゃんと物語の一部や。','決断は切り捨てることちゃう。大切なもんを選ぶことや。','責任感が強い日ほど、自分の足元も確かめよ。','当たり前の暮らしを整える。案外それが一番の近道や。','風向きが変わったら、意地張らず帆を動かしたらええ。','新しい船出の前に、古い荷物を一つ下ろそか。','勇気は突進と違う。納得して踏み出す一歩が大事や。','用心深いのは悪いことちゃう。考えたら、あとは一歩や。','大勝負せんでもええ。昨日の自分を一歩越えたら十分や。','芯がある人ほど、時には柔らかく曲がれるんやで。','全部に勝とうとせんでええ。大事な勝負を選びよし。','準備してる自分を地味やと思わんといて。未来の味方や。','乗り越えるだけやなく、その先で何を育てたいか考えよ。','守るべき信念があるなら、無駄な争いは手放してええ。','粘るんも強さ。方向を変えるんも、また強さや。','自分の意思は声にしてええ。誰かを責める必要はないで。','遠くへ行く日ほど、帰ってくる場所も大切にしよ。','ひとりで全部抱えんでええ。頼れる縁もあんたの財産や。'
+];
+function mirokuClosing(v){return mirokuClosings[v.d-1]+' '+(v.d===31?'人の力を借りることも、立派な選択やで。':guardianInsights[v.z]);}
+
 function draw(v){
  c.clearRect(0,0,W,H);let bg=c.createLinearGradient(0,0,W,H);bg.addColorStop(0,'#f4f9e9');bg.addColorStop(.48,'#fffaf0');bg.addColorStop(1,'#e7f1df');c.fillStyle=bg;c.fillRect(0,0,W,H);
  c.strokeStyle='#0c5b3e';c.lineWidth=19;c.strokeRect(14,14,W-28,H-28);c.strokeStyle='#e5c66b';c.lineWidth=7;c.strokeRect(28,28,W-56,H-56);c.strokeStyle='#a88b43';c.lineWidth=2;c.strokeRect(43,43,W-86,H-86);
@@ -79,15 +88,15 @@ function draw(v){
  band('神仏が結ぶ、あんたの物語',705);
  const title=v.g[1]+' × '+(v.b?v.b[1]:'支え合う心')+' × '+v.p[1];
  text(title,620,790,23,'#15563e',800,'center');
- const story=buildStory(v), top=822,bottom=1165;
- let chosen=19,lh=29;
- for(let sz=21;sz>=17;sz--){let h=0;for(const p of story)h+=lines(p,1020,sz,400).length*(sz+9)+11;if(h<=bottom-top){chosen=sz;lh=sz+9;break}}
- let yy=top;for(const p of story){yy=paragraph(p,110,yy,1020,chosen,lh,99,'#254535');yy+=11}
- band('三つのご縁を暮らしに生かす',1182);
+ const story=buildStory(v), top=822,bottom=1205;
+ let chosen=18,lh=25, gap=5;
+ for(let sz=20;sz>=13;sz--){let h=0;for(const p of story)h+=lines(p,1020,sz,400).length*(sz+6)+gap;if(h<=bottom-top){chosen=sz;lh=sz+6;break}}
+ let yy=top;for(const p of story){yy=paragraph(p,110,yy,1020,chosen,lh,99,'#254535');yy+=gap}
+ band('三つのご縁を暮らしに生かす',1220);
  const rows=[['神様｜向き合う姿勢',v.g[3]+'。'+godExtra(v.g[1])],['仏様｜心の整え方',v.b?v.b[2]:'助けを求めることも、自分を守るための知恵やで。'],['守り本尊｜今日の実践',guardianInsights[v.z]]];
- rows.forEach((r,i)=>{let y=1251+i*77;rr(84,y,1072,68,12,'rgba(255,254,247,.94)','#d4bf80',2);rr(97,y+10,280,47,10,'#e6efdf');text(r[0],237,y+40,19,'#14563d',700,'center');const ar=lines(r[1],744,19,500);ar.slice(0,2).forEach((t,j)=>text(t,397,y+29+j*25,19,'#2d4a39',500))});
- band('うめこのひとこと',1502);
- const close=`${v.g[3]}。せやけど焦らんでええ。${v.b?v.b[2]:'頼れる人には頼ってええ。'} ${v.p[2]}。`;let cy=1581;const cl=lines(close,1030,20,700);cl.slice(0,3).forEach(t=>{text(t,104,cy,20,'#18563d',700);cy+=29});
+ rows.forEach((r,i)=>{let y=1289+i*66;rr(84,y,1072,60,12,'rgba(255,254,247,.94)','#d4bf80',2);rr(97,y+8,280,43,10,'#e6efdf');text(r[0],237,y+35,19,'#14563d',700,'center');const ar=lines(r[1],744,19,500);ar.slice(0,2).forEach((t,j)=>text(t,397,y+25+j*23,19,'#2d4a39',500))});
+ band('みろくのひとこと',1502);
+ const close=mirokuClosing(v);let cy=1581;const cl=lines(close,1030,21,700);cl.slice(0,3).forEach(t=>{text(t,104,cy,21,'#18563d',700);cy+=30});
  c.fillStyle='#10533b';c.fillRect(48,1673,W-96,39);text('みろく流の創作鑑定　｜　参考資料の確認年：2026年　｜　神仏の配当には諸説あり',620,1699,16,'#fff8d9',600,'center');
 }
 function make(){let s=$('birth').value,name=$('name').value.trim()||'あなた';if(!/^\d{4}-\d{2}-\d{2}$/.test(s)){showError('生年月日を入力してな。');return}let [y,m,d]=s.split('-').map(Number),dt=new Date(0);dt.setFullYear(y,m-1,d);if(y<1||dt.getFullYear()!==y||dt.getMonth()!==m-1||dt.getDate()!==d||dt>new Date()){showError('有効な生年月日を入力してな。');return}showError('');let z=$('boundary').value==='manual'?$('manualZ').value:zodiacs[((y-4)%12+12)%12];let v={name,y,m,d,z,g:gods[d-1],b:d===31?null:buddhas[d-1],p:guardians[z]};draw(v);$('preview').classList.remove('hidden');$('save').disabled=false;$('print').disabled=false;$('preview').scrollIntoView({behavior:'smooth'});}
