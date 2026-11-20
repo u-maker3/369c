@@ -180,9 +180,9 @@ function draw(v){
  qlines.slice(0,2).forEach((t,i)=>text(t,100,1230+i*23,22,'#285b43',600));
  band('三つのご縁を暮らしに生かす',1260);
  const rows=[['神様｜向き合う姿勢',godPractices[v.d-1]+'。'],['仏様｜心の整え方',v.d===31?'一人で抱えず、相談したい相手を一人決める。':buddhaPractices[v.d-1]+'。'],['守り本尊｜今日の実践',combinedGuardianPractice(v)]];
- rows.forEach((r,i)=>{let y=1323+i*63;rr(84,y,1072,57,12,'rgba(255,254,247,.94)','#d4bf80',2);rr(97,y+7,280,43,10,'#e6efdf');text(r[0],237,y+34,19,'#14563d',700,'center');const ar=lines(r[1],744,19,500);ar.slice(0,2).forEach((t,j)=>text(t,397,y+24+j*23,19,'#2d4a39',500))});
- band('みろくのひとこと',1534);
- const close=mirokuClosing(v);let cy=1605,closeSize=25,cl=[];for(let sz=25;sz>=19;sz--){const trial=lines(close,1030,sz,700);if(trial.length<=3){closeSize=sz;cl=trial;break}}if(!cl.length)cl=lines(close,1030,19,700);cl.slice(0,3).forEach(t=>{text(t,104,cy,closeSize,'#18563d',700);cy+=36});
+ rows.forEach((r,i)=>{let y=1323+i*55;rr(84,y,1072,50,12,'rgba(255,254,247,.94)','#d4bf80',2);rr(97,y+5,280,40,10,'#e6efdf');text(r[0],237,y+31,19,'#14563d',700,'center');const ar=lines(r[1],744,19,500);ar.slice(0,2).forEach((t,j)=>text(t,397,y+21+j*21,19,'#2d4a39',500))});
+ band('みろくのひとこと',1498);
+ const close=mirokuClosing(v);let cy=1590,closeSize=25,cl=[];for(let sz=25;sz>=19;sz--){const trial=lines(close,1030,sz,700);if(trial.length<=3){closeSize=sz;cl=trial;break}}if(!cl.length)cl=lines(close,1030,19,700);cl.slice(0,3).forEach(t=>{text(t,104,cy,closeSize,'#18563d',700);cy+=32});
  c.fillStyle='#10533b';c.fillRect(48,1683,W-96,39);text('みろく流の創作鑑定　｜　参考資料整理：2026年　｜　神仏の配当には諸説あり',620,1709,16,'#fff8d9',600,'center');
 }
 function make(){let s=$('birth').value,name=$('name').value.trim()||'あなた';if(!/^\d{4}-\d{2}-\d{2}$/.test(s)){showError('生年月日を入力してな。');return}let [y,m,d]=s.split('-').map(Number),dt=new Date(0);dt.setFullYear(y,m-1,d);if(y<1||dt.getFullYear()!==y||dt.getMonth()!==m-1||dt.getDate()!==d||dt>new Date()){showError('有効な生年月日を入力してな。');return}showError('');let z=$('boundary').value==='manual'?$('manualZ').value:zodiacs[((y-4)%12+12)%12];let v={name,y,m,d,z,g:gods[d-1],b:d===31?null:buddhas[d-1],p:guardians[z]};draw(v);$('preview').classList.remove('hidden');$('save').disabled=false;$('print').disabled=false;$('preview').scrollIntoView({behavior:'smooth'});}
